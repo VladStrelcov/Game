@@ -71,38 +71,12 @@ void Game()
                   "Эверест_перед.bmp", "Эверест_середина.bmp", "зад.bmp",
                   &Catx, &Caty);
 
+        Touching (Catx, Caty, Dog1x, Dog1y, "Хотите заново сыграть???",
+                  &FonPered, &FonSer, &FonZad,
+                  "Тропинка_перед.bmp", "Тропинка_середина.bmp", "Тропинка_зад.bmp",
+                  &Catx, &Caty);
 
         Logic (Dog1x, Dog1y, Catx, Caty, &Dog1vx, &Dog1vy);
-
-
-        double f = sqrt ((Catx-Dog1x)*(Catx-Dog1x)+(Caty-Dog1y)*(Caty-Dog1y));
-
-        if (f <= 40)
-            {
-
-            int Answer = txMessageBox ("Хотите заново сыграть???","ВОПРОС???", MB_YESNO);
-            if (Answer == IDYES)
-                {
-
-                txDeleteDC (FonPered);
-                txDeleteDC (FonSer);
-                txDeleteDC (FonZad);
-
-                FonPered = txLoadImage ("тропинка_перед.bmp");
-                FonSer   = txLoadImage ("тропинка_середина.bmp");
-                FonZad   = txLoadImage ("тропинка_зад.bmp");
-
-                Catx     = rand()/65;
-                Caty     = rand()/65;
-
-                }
-
-             else
-                {
-
-                }
-
-            }
 
         txSleep (10);
         }
