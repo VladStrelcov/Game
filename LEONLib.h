@@ -3,9 +3,13 @@ const int    WinX  = 1000, WinY  = 600;
 
 //=============================================================================
 
-void Button  (int up, int down, int right, int left, int stop, int *vx, int *vy);
-void Physics (int *x, int *y, int *vx, int *vy);
-void Logic   (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
+void Button   (int up, int down, int right, int left, int stop, int *vx, int *vy);
+void Physics  (int *x, int *y, int *vx, int *vy);
+void Logic    (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
+void Touching (int x, int y, int x2, int y2, char BoxAnswer[],
+               HDC *FonPered, HDC *FonSer, HDC *FonZad,
+               char PeredName[], char SerName[], char ZadName[],
+               int *RandX, int *RandY);
 
 //=====================================================================================================================================
 
@@ -53,6 +57,38 @@ void Logic (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy)
 
     *vx = -(Dogx - Catx) / 15;
     *vy = -(Dogy - Caty) / 15;
+
+    }
+
+void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
+                HDC *FonPered, HDC *FonSer, HDC *FonZad,
+                char PeredName[], char SerName[], char ZadName[],
+                int *RandX, int *RandY)
+    {
+
+    double Distance = sqrt ((x-x2)*(x-x2)+(y-y2)*(y-y2));
+
+    if (Distance <= 50)
+        {
+
+        int Answer = txMessageBox (BoxAnswer,"бнопня???", MB_YESNO);
+        if (Answer == IDYES)
+            {
+
+            txDeleteDC (*FonPered);
+            txDeleteDC (*FonSer);
+            txDeleteDC (*FonZad);
+
+            *FonPered = txLoadImage (PeredName);
+            *FonSer   = txLoadImage (SerName);
+            *FonZad   = txLoadImage (ZadName);
+
+            *RandX  = rand()/65;
+            *RandY  = rand()/65;
+
+            }
+
+        }
 
     }
 
