@@ -5,8 +5,8 @@ const int    WinX     = 1350, WinY     = 750;
 const int    DogX     = 150,  DogY     = 150;
 const int    CatX     = 100,  CatY     = 99;
 const int    SausageX = 90,   SausageY = 50;
-const int    Sausagex = 900,  Sausagey = 100;
-const int    Hero     = 20;
+const int    Sausagex = 1250,  Sausagey = 100;
+const int    Hero     = 30;
 const int    TimeFact = 4;
 
 #include "LEONLib.h"
@@ -95,15 +95,15 @@ void Photo (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int 
             int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered)
     {
 
-    txBitBlt         (xmap - Catx/Hero, ymap - Catx/Hero, FonZad);
-    txTransparentBlt (xmap,     ymap,     FonSer);
+    txBitBlt         (xmap - Catx/Hero + 50,   ymap - Catx/Hero,                FonZad);
+    txTransparentBlt (xmap,               ymap,                            FonSer);
 
     txTransparentBlt (txDC(),   Dog2x,    Dog2y,    DogX,        DogY,     Dog2,    (t/TimeFact)%2 * DogX);
     txTransparentBlt (txDC(),   Sausagex, Sausagey, SausageX,    SausageY, LoveCat, (t/TimeFact)%2 * SausageX);
     txTransparentBlt (txDC(),   Catx,     Caty,     CatX,        CatY,     Cat,     (t/TimeFact)%2 * CatX);
     txTransparentBlt (txDC(),   Dog1x,    Dog1y,    DogX,        DogY,     Dog,     (t/TimeFact)%2 * DogX);
 
-    txTransparentBlt (xmap + Catx/Hero - 50, ymap + Caty/Hero - 50, FonPered);
+    txTransparentBlt (xmap + Catx/Hero - 50,        ymap + Caty/Hero - 50, FonPered);
 
     }
 
