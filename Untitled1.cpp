@@ -1,7 +1,7 @@
 #include "TXLib.h"
 
 const double Fast     = 0.4;
-const int    WinX     = 1000, WinY  = 600;
+const int    WinX     = 1350, WinY     = 750;
 const int    DogX     = 150,  DogY     = 150;
 const int    CatX     = 100,  CatY     = 99;
 const int    SausageX = 90,   SausageY = 50;
