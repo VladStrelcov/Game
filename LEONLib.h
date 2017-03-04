@@ -1,9 +1,5 @@
-const double Fast  = 0.4;
-const int    WinX  = 1000, WinY  = 600;
 
-//=============================================================================
-
-void Button   (int up, int down, int right, int left, int stop, int *vx, int *vy);
+void Button   (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy);
 void Physics  (int *x, int *y, int *vx, int *vy);
 void Logic    (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
 void Touching (int x, int y, int x2, int y2, char BoxAnswer[],
@@ -13,7 +9,7 @@ void Touching (int x, int y, int x2, int y2, char BoxAnswer[],
 
 //=====================================================================================================================================
 
-void Button (int up, int down, int right, int left, int stop, int *vx, int *vy)
+void Button (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy)
     {
 
     if (GetAsyncKeyState (up))    (*vy)--;
@@ -22,6 +18,11 @@ void Button (int up, int down, int right, int left, int stop, int *vx, int *vy)
     if (GetAsyncKeyState (right)) (*vx)++;
     if (GetAsyncKeyState (stop))  (*vx) = (*vy) = 0;
 
+    if (GetAsyncKeyState (crax))
+       {
+       *x = Sausagex;
+       *y = Sausagey;
+       }
     }
 
 void Physics(int *x, int *y, int *vx, int *vy)
@@ -92,7 +93,7 @@ void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
 
     }
 
-//=======================================================================================================================
+//=====================================================================================================================================
 
 
 
