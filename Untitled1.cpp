@@ -73,7 +73,7 @@ void Game()
 
         Touching (Sausagex, Sausagey, Catx, Caty, "’отите перейти на 2 level???",
                   &FonPered, &FonSer, &FonZad,
-                  "Ёверест_перед.bmp", "Ёверест_середина2.bmp", "Ёверест_зад.bmp",
+                  "Ёверест_перед.bmp", "Ёверест_середина.bmp", "зад.bmp",
                   &Catx, &Caty);
 
         Touching (Catx, Caty, Dog1x, Dog1y, "’отите заново сыграть???",
