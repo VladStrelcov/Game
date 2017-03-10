@@ -83,6 +83,10 @@ void Game()
 
         Logic (Dog1x, Dog1y, Catx, Caty, &Dog1vx, &Dog1vy);
 
+        int time = GetTickCount();
+
+
+
         txSleep (10);
         t++;
         }
