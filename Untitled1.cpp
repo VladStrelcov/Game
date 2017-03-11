@@ -13,9 +13,10 @@ const int    TimeFact = 4;
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Game      ();
-void Photo     (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
-                int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered);
+void Game         ();
+void RenderScreen (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
+                   int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
+void DrawTime ();
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -46,6 +47,11 @@ void Game()
     HDC  Dog2     = txLoadImage ("ерк3.bmp");
     HDC  Cat      = txLoadImage ("кошка.bmp");
     HDC  LoveCat  = txLoadImage ("колбаса.bmp");
+    HDC  TimeGame = txLoadImage ("табло.bmp");
+
+    txSelectFont ("Arial", 35);
+
+    int timeStart = GetTickCount();
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
@@ -53,8 +59,8 @@ void Game()
 
         if (!GetAsyncKeyState (VK_SHIFT))  txClear ();
 
-        Photo (Dog1x, Dog1y, Dog2x, Dog2y, Catx, Caty, xmap, ymap,
-               t, FonZad, FonSer, Dog, Dog2, LoveCat, Cat, FonPered);
+        RenderScreen (Dog1x, Dog1y, Dog2x, Dog2y, Catx, Caty, xmap, ymap,
+                      t, FonZad, FonSer, Dog, Dog2, LoveCat, Cat, FonPered, TimeGame);
 
         if (GetAsyncKeyState (VK_NUMPAD4))
             {
@@ -83,9 +89,7 @@ void Game()
 
         Logic (Dog1x, Dog1y, Catx, Caty, &Dog1vx, &Dog1vy);
 
-        int time = GetTickCount();
-
-
+        DrawTime ();
 
         txSleep (10);
         t++;
@@ -95,8 +99,8 @@ void Game()
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Photo (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
-            int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered)
+void RenderScreen (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
+                   int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 
     txBitBlt         (xmap - Catx/Hero + 50,   ymap - Catx/Hero,                FonZad);
@@ -109,10 +113,20 @@ void Photo (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int 
 
     txTransparentBlt (xmap + Catx/Hero - 50,        ymap + Caty/Hero - 50, FonPered);
 
+    txTransparentBlt (txDC(), 0, 0, 100, 70, TimeGame);
+
     }
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
+void DrawTime ()
+    {
+    int time = GetTickCount();
+    char Temporary [50] = "";
+    sprintf (Temporary, "%d", (time-timeStart)/1000);
+    txSetColor (TX_YELLOW);
+    txDrawText (0, 25, 100, 70, Temporary);
+    }
 
 
 
