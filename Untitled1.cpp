@@ -16,7 +16,7 @@ const int    TimeFact = 4;
 void Game         ();
 void RenderScreen (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
-void DrawTime (int timeStart);
+void DrawTime     (int timeStart);
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -40,14 +40,14 @@ void Game()
     int xmap     = 0,   ymap   = 0;
     int t        = 0;
 
-    HDC  FonPered = txLoadImage ("тропинка_перед.bmp");
-    HDC  FonZad   = txLoadImage ("тропинка_зад.bmp");
-    HDC  FonSer   = txLoadImage ("тропинка_середина.bmp");
-    HDC  Dog      = txLoadImage ("ерк3.bmp");
-    HDC  Dog2     = txLoadImage ("ерк3.bmp");
-    HDC  Cat      = txLoadImage ("кошка.bmp");
-    HDC  LoveCat  = txLoadImage ("колбаса.bmp");
-    HDC  TimeGame = txLoadImage ("табло.bmp");
+    HDC FonPered = txLoadImage ("тропинка_перед.bmp");
+    HDC FonZad   = txLoadImage ("тропинка_зад.bmp");
+    HDC FonSer   = txLoadImage ("тропинка_середина.bmp");
+    HDC Dog      = txLoadImage ("ерк3.bmp");
+    HDC Dog2     = txLoadImage ("ерк3.bmp");
+    HDC Cat      = txLoadImage ("кошка.bmp");
+    HDC LoveCat  = txLoadImage ("колбаса.bmp");
+    HDC TimeGame = txLoadImage ("табло.bmp");
 
     txSelectFont ("Arial", 35);
 
@@ -71,23 +71,23 @@ void Game()
             xmap++;
             }
 
-        Physics (&Dog1x, &Dog1y, &Dog1vx, &Dog1vy);
-        Physics (&Dog2x, &Dog2y, &Dog2vx, &Dog2vy);
-        Physics (&Catx, &Caty,   &Catvx,   &Catvy);
+        Physics  (&Dog1x, &Dog1y, &Dog1vx, &Dog1vy);
+        Physics  (&Dog2x, &Dog2y, &Dog2vx, &Dog2vy);
+        Physics  (&Catx,  &Caty,  &Catvx,  &Catvy);
 
-        Button  (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Catx, &Caty, &Catvx, &Catvy);
+        Button   (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Catx, &Caty, &Catvx, &Catvy);
 
-        Touching (Sausagex, Sausagey, Catx, Caty, "Хотите перейти на 2 level???",
-                  &FonPered, &FonSer, &FonZad,
+        Touching (Sausagex,  Sausagey, Catx, Caty, "Хотите перейти на 2 level???",
+                  &FonPered, &FonSer,  &FonZad,
                   "Эверест_перед.bmp", "Эверест_середина.bmp", "зад.bmp",
-                  &Catx, &Caty);
+                  &Catx,     &Caty);
 
-        Touching (Catx, Caty, Dog1x, Dog1y, "Хотите заново сыграть???",
-                  &FonPered, &FonSer, &FonZad,
+        Touching (Catx, Caty, Dog1x,   Dog1y, "Хотите заново сыграть???",
+                  &FonPered,  &FonSer, &FonZad,
                   "Тропинка_перед.bmp", "Тропинка_середина.bmp", "Тропинка_зад.bmp",
-                  &Catx, &Caty);
+                  &Catx,      &Caty);
 
-        Logic (Dog1x, Dog1y, Catx, Caty, &Dog1vx, &Dog1vy);
+        Logic    (Dog1x, Dog1y, Catx, Caty, &Dog1vx, &Dog1vy);
 
         DrawTime (timeStart);
 
@@ -123,7 +123,7 @@ void DrawTime (int timeStart)
     {
     int time = GetTickCount();
     char Temporary [50] = "";
-    sprintf (Temporary, "%d", (time-timeStart)/1000);
+    sprintf    (Temporary, "%d", (time-timeStart)/1000);
     txSetColor (TX_YELLOW);
     txDrawText (0, 25, 100, 70, Temporary);
     }
