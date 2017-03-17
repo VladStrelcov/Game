@@ -1,11 +1,14 @@
 
-void Button   (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy);
-void Physics  (int *x, int *y, int *vx, int *vy);
-void Logic    (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
-void Touching (int x, int y, int x2, int y2, char BoxAnswer[],
-               HDC *FonPered, HDC *FonSer, HDC *FonZad,
-               char PeredName[], char SerName[], char ZadName[],
-               int *RandX, int *RandY);
+void Button          (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy);
+
+void Physics         (int *x, int *y, int *vx, int *vy);
+
+void Logic           (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
+
+void Touching        (int x, int y, int x2, int y2, char BoxAnswer[],
+                      HDC *FonPered, HDC *FonSer, HDC *FonZad, char PeredName[], char SerName[], char ZadName[], int *RandX, int *RandY);
+
+void LeftRightWindow (int Left, int Right, int *xmap, int *ymap);
 
 //=====================================================================================================================================
 
@@ -62,9 +65,7 @@ void Logic (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy)
     }
 
 void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
-                HDC *FonPered, HDC *FonSer, HDC *FonZad,
-                char PeredName[], char SerName[], char ZadName[],
-                int *RandX, int *RandY)
+                HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[], int *RandX, int *RandY)
     {
 
     double Distance = sqrt ((x-x2)*(x-x2)+(y-y2)*(y-y2));
@@ -89,6 +90,20 @@ void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
 
             }
 
+        }
+
+    }
+
+void LeftRightWindow (int Left, int Right, int *xmap, int *ymap)
+    {
+
+    if (GetAsyncKeyState (Left))
+        {
+        (*xmap)--;
+        }
+    if (GetAsyncKeyState (Right))
+        {
+        (*xmap)++;
         }
 
     }
