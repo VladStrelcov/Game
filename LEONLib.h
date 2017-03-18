@@ -1,74 +1,79 @@
+struct Hero
+    {
+    int x,  y;
+    int vx, vy;
+    };
 
-void Button          (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy);
+void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero);
 
-void Physics         (int *x, int *y, int *vx, int *vy);
+void Physics         (Hero* hero);
 
-void Logic           (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy);
+void Logic           ( Hero* hero,  Hero* hero2, int *vx, int *vy);
 
-void Touching        (int x, int y, int x2, int y2, char BoxAnswer[],
+void Touching        (Hero* hero, Hero* hero2, char BoxAnswer[],
                       HDC *FonPered, HDC *FonSer, HDC *FonZad, char PeredName[], char SerName[], char ZadName[], int *RandX, int *RandY);
 
 void LeftRightWindow (int Left, int Right, int *xmap, int *ymap);
 
 //=====================================================================================================================================
 
-void Button (int up, int down, int right, int left, int stop, int crax, int *x, int *y, int *vx, int *vy)
+void Button (int up, int down, int right, int left, int stop, int crax, Hero* hero, Hero* Sausage)
     {
 
-    if (GetAsyncKeyState (up))    (*vy)--;
-    if (GetAsyncKeyState (down))  (*vy)++;
-    if (GetAsyncKeyState (left))  (*vx)--;
-    if (GetAsyncKeyState (right)) (*vx)++;
-    if (GetAsyncKeyState (stop))  (*vx) = (*vy) = 0;
+    if (GetAsyncKeyState (up))    ((*hero).vy)--;
+    if (GetAsyncKeyState (down))  ((*hero).vy)++;
+    if (GetAsyncKeyState (left))  ((*hero).vx)--;
+    if (GetAsyncKeyState (right)) ((*hero).vx)++;
+    if (GetAsyncKeyState (stop))  ((*hero).vx) = ((*hero).vy) = 0;
 
     if (GetAsyncKeyState (crax))
        {
-       *x = Sausagex;
-       *y = Sausagey;
+       (*hero).x = (*Sausage).x;
+       (*hero).y = (*Sausage).y;
        }
     }
 
-void Physics(int *x, int *y, int *vx, int *vy)
+void Physics (Hero* hero)
     {
 
-    *x = ROUND (*x + *vx * Fast);
-    *y = ROUND (*y + *vy * Fast);
+    (*hero).x = ROUND ((*hero).x + (*hero).vx * Fast);
+    (*hero).y = ROUND ((*hero).y + (*hero).vy * Fast);
 
-    if (*y >= WinY - 50)
+    if ((*hero).y >= WinY - 50)
         {
-        *vy = -*vy;
+        (*hero).vy = -(*hero).vy;
         }
 
-    if (*x >= WinX - 50)
+    if ((*hero).x >= WinX - 50)
         {
-        *vx = -*vx;
+        (*hero).vx = -(*hero).vx;
         }
 
-    if (*x <= 50)
+    if ((*hero).x <= 50)
         {
-        *vx = -*vx;
+        (*hero).vx = -(*hero).vx;
         }
 
-    if (*y <= 50)
+    if ((*hero).y <= 50)
         {
-        *vy = -*vy;
+        (*hero).vy = -(*hero).vy;
         }
 
     }
 
-void Logic (int Dogx, int Dogy, int Catx, int Caty, int *vx, int *vy)
+void Logic ( Hero* hero,  Hero* hero2)
     {
 
-    *vx = -(Dogx - Catx) / 15;
-    *vy = -(Dogy - Caty) / 15;
+    (*hero).vx = -((*hero).x - (*hero2).x) / 15;
+    (*hero).vy = -((*hero).y - (*hero2).y) / 15;
 
     }
 
-void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
-                HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[], int *RandX, int *RandY)
+void  Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
+                HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[])
     {
 
-    double Distance = sqrt ((x-x2)*(x-x2)+(y-y2)*(y-y2));
+    double Distance = sqrt ( ((*hero).x - (*hero2).x) * ((*hero).x - (*hero2).x) + ((*hero).y - (*hero2).y) * ((*hero).y - (*hero2).y));
 
     if (Distance <= 50)
         {
@@ -85,8 +90,8 @@ void  Touching (int x, int y, int x2, int y2, char BoxAnswer[],
             *FonSer   = txLoadImage (SerName);
             *FonZad   = txLoadImage (ZadName);
 
-            *RandX  = rand()/65;
-            *RandY  = rand()/65;
+            (*hero2).x  = rand()/65;
+            (*hero2).y  = rand()/65;
 
             }
 
