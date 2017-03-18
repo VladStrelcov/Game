@@ -1,14 +1,15 @@
 #include "TXLib.h"
 
-const double Fast     = 0.4;
+const double Fast          = 0.4;
+const int    TimeGameFast  = 10;
 
-const int    WinX     = 1350,  WinY     = 750;
-const int    DogX     = 150,   DogY     = 150;
-const int    CatX     = 100,   CatY     = 99;
-const int    SausageX = 90,    SausageY = 50;
-const int    Sausagex = 1250,  Sausagey = 100;
-const int    Hero     = 30;
-const int    TimeFact = 4;
+const int    WinX          = 1350,  WinY     = 750;
+const int    DogX          = 150,   DogY     = 150;
+const int    CatX          = 100,   CatY     = 99;
+const int    SausageX      = 90,    SausageY = 50;
+const int    Sausagex      = 1250,  Sausagey = 100;
+const int    Hero          = 30;
+const int    TimeFact      = 4;
 
 const char   Level1Pered[] = "тропинка_перед.bmp";
 const char   Level1Ser[]   = "тропинка_середина.bmp";
@@ -94,9 +95,16 @@ void Game()
 
         DrawTime (timeStart);
 
-        if ((GetTickCount() - timeStart)/1000 > 10)
+        if ((GetTickCount() - timeStart)/1000 > TimeGameFast)
             {
-            break;
+            int Answer = txMessageBox ("Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ","Game", MB_YESNO);
+            if (Answer == IDYES)
+                {
+                }
+            else
+                {
+                break;
+                }
             }
 
         txSleep (10);
@@ -106,6 +114,20 @@ void Game()
     }
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+void Downloud (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
+    {
+
+    *FonPered = txLoadImage (Level1Pered);
+    *FonSer   = txLoadImage (Level1Ser);
+    *FonZad   = txLoadImage (Leve1lZad);
+    *Dog      = txLoadImage (Player2);
+    *Dog2     = txLoadImage (Player2);
+    *Cat      = txLoadImage (Player1);
+    *LoveCat  = txLoadImage (LovePlayer);
+    *TimeGame = txLoadImage (Scoreboard);
+
+    }
 
 void RenderScreen (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
@@ -136,19 +158,7 @@ void DrawTime (int timeStart)
     txDrawText (0, 25, 100, 70, Temporary);
     }
 
-void Downloud (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
-    {
 
-    *FonPered = txLoadImage (Level1Pered);
-    *FonSer   = txLoadImage (Level1Ser);
-    *FonZad   = txLoadImage (Leve1lZad);
-    *Dog      = txLoadImage (Player2);
-    *Dog2     = txLoadImage (Player2);
-    *Cat      = txLoadImage (Player1);
-    *LoveCat  = txLoadImage (LovePlayer);
-    *TimeGame = txLoadImage (Scoreboard);
-
-    }
 
 
 
