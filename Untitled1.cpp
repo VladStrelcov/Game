@@ -100,6 +100,7 @@ void Game()
             int Answer = txMessageBox ("бШ опнхцпюкх, БШ ксгеп!!! ","Game", MB_YESNO);
             if (Answer == IDYES)
                 {
+                timeStart = GetTickCount();
                 }
             else
                 {
