@@ -2,6 +2,7 @@ struct Hero
     {
     int x,  y;
     int vx, vy;
+    int SizeImageX, SizeImageY;
     };
 
 void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero);

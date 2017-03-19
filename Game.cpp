@@ -4,15 +4,12 @@ const double Fast          = 0.4;
 const int    TimeGameFast  = 10;
 
 const int    WinX          = 1350,  WinY     = 750;
-const int    DogX          = 150,   DogY     = 150;
-const int    CatX          = 100,   CatY     = 99;
-const int    SausageX      = 90,    SausageY = 50;
 const int    HeroOfWindow  = 30;
 const int    TimeFact      = 4;
 
 const char   Level1Pered[] = "тропинка_перед.bmp";
 const char   Level1Ser[]   = "тропинка_середина.bmp";
-const char   Level1Zad[]  = "тропинка_зад.bmp";
+const char   Level1Zad[]   = "тропинка_зад.bmp";
 
 const char   Level2Pered[] = "Эверест_перед.bmp";
 const char   Level2Ser[]   = "Эверест_середина.bmp";
@@ -54,12 +51,12 @@ int main()
 void Game()
     {
 
-    Hero Dog1    = {900, 300, 3, 3};
-    Hero Dog2    = {600, 300, 3, 3};
-    Hero Cat     = {150, 300, 0, 0};
-    Hero Sausage = {1250, 100};
+    Hero Dog1    = {900,  300, 3, 3, 150, 150};
+    Hero Dog2    = {600,  300, 3, 3, 150, 150};
+    Hero Cat     = {150,  300, 0, 0, 100, 99};
+    Hero Sausage = {1250, 100, 0, 0, 90,  50};
 
-    int xmap     = 0,    ymap   = 0;
+    int xmap     = 0, ymap   = 0;
     int t        = 0;
 
     HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2Image = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
@@ -104,6 +101,15 @@ void Game()
             if (Answer == IDYES)
                 {
                 timeStart = GetTickCount();
+
+                txDeleteDC (FonPered);
+                txDeleteDC (FonSer);
+                txDeleteDC (FonZad);
+
+                FonPered = txLoadImage (Level1Pered);
+                FonSer   = txLoadImage (Level1Ser);
+                FonZad   = txLoadImage (Level1Zad);
+
                 Cat.x  = rand()/65;
                 Cat.y  = rand()/65;
                 }
@@ -140,12 +146,12 @@ void RenderScreen (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSaus
     {
 
     txBitBlt         (xmap - (*heroCat).x/HeroOfWindow + 50,   ymap - (*heroCat).x/HeroOfWindow,                FonZad);
-    txTransparentBlt (xmap,               ymap,                            FonSer);
+    txTransparentBlt (xmap,     ymap,                FonSer);
 
-    txTransparentBlt (txDC(),   (*heroDog1).x,       (*heroDog1).y,    DogX,        DogY,     Dog2,    (t/TimeFact)%2 * DogX);
-    txTransparentBlt (txDC(),   (*heroSausage).x,    (*heroSausage).y, SausageX,    SausageY, LoveCat, (t/TimeFact)%2 * SausageX);
-    txTransparentBlt (txDC(),   (*heroCat).x,        (*heroCat).y,     CatX,        CatY,     Cat,     (t/TimeFact)%2 * CatX);
-    txTransparentBlt (txDC(),   (*heroDog2).x,       (*heroDog2).y,      DogX,        DogY,     Dog,     (t/TimeFact)%2 * DogX);
+    txTransparentBlt (txDC(),   (*heroDog1).x,       (*heroDog1).y,    (*heroDog1).SizeImageX,       (*heroDog1).SizeImageY,    Dog2,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
+    txTransparentBlt (txDC(),   (*heroSausage).x,    (*heroSausage).y, (*heroSausage).SizeImageX,    (*heroSausage).SizeImageY, LoveCat, (t/TimeFact)%2 * (*heroSausage).SizeImageX);
+    txTransparentBlt (txDC(),   (*heroCat).x,        (*heroCat).y,     (*heroCat).SizeImageX,        (*heroCat).SizeImageY,     Cat,     (t/TimeFact)%2 * (*heroCat).SizeImageX);
+    txTransparentBlt (txDC(),   (*heroDog2).x,       (*heroDog2).y,    (*heroDog2).SizeImageX,       (*heroDog2).SizeImageY,    Dog,     (t/TimeFact)%2 * (*heroDog2 ).SizeImageX);
 
     txTransparentBlt (xmap + (*heroCat).x/HeroOfWindow - 50,   ymap + (*heroCat).y/HeroOfWindow - 50, FonPered);
 
