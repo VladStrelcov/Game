@@ -9,10 +9,13 @@ void Button          (int up, int down, int right, int left, int stop, int crax,
 
 void Physics         (Hero* hero);
 
-void Logic           ( Hero* hero,  Hero* hero2, int *vx, int *vy);
+void Logic           (Hero* hero,  Hero* hero2, int *vx, int *vy);
 
 void Touching        (Hero* hero, Hero* hero2, char BoxAnswer[],
-                      HDC *FonPered, HDC *FonSer, HDC *FonZad, char PeredName[], char SerName[], char ZadName[], int *RandX, int *RandY);
+                      HDC *FonPered, HDC *FonSer, HDC *FonZad, char PeredName[], char SerName[], char ZadName[]);
+
+void UpdateTime      (Hero* hero, int *timeStart, char BoxAnswer[],
+                      HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[]);
 
 void LeftRightWindow (int Left, int Right, int *xmap, int *ymap);
 
@@ -95,9 +98,41 @@ void  Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
             (*hero2).y  = rand()/65;
 
             }
+        else
+            {
+            //break;
+            }
 
         }
 
+    }
+
+void UpdateTime (Hero* hero, int *timeStart, char BoxAnswer[],
+                 HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[])
+    {
+    if ((GetTickCount() - *timeStart)/1000 > TimeGameFast)
+                {
+                int Answer = txMessageBox (BoxAnswer,"Game", MB_YESNO);
+                if (Answer == IDYES)
+                    {
+                    *timeStart = GetTickCount();
+
+                    txDeleteDC (*FonPered);
+                    txDeleteDC (*FonSer);
+                    txDeleteDC (*FonZad);
+
+                    *FonPered = txLoadImage (PeredName);
+                    *FonSer   = txLoadImage (SerName);
+                    *FonZad   = txLoadImage (ZadName);
+
+                    (*hero).x  = rand()/65;
+                    (*hero).y  = rand()/65;
+                    }
+                else
+                    {
+                    //break;
+                    }
+                }
     }
 
 void LeftRightWindow (int Left, int Right, int *xmap, int *ymap)

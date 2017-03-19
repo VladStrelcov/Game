@@ -61,63 +61,42 @@ void Game()
 
     HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2Image = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
 
-    Downloud (&FonPered, &FonSer, &FonZad, &Dog, &Dog2Image, &CatImage, &LoveCat, &TimeGame);
+    Downloud            (&FonPered, &FonSer, &FonZad, &Dog, &Dog2Image, &CatImage, &LoveCat, &TimeGame);
 
 
-    txSelectFont ("Arial", 35);
+    txSelectFont        ("Arial", 35);
 
     int timeStart = GetTickCount();
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
-        txSetFillColor (TX_BLACK);
+        txSetFillColor  (TX_BLACK);
 
         if (!GetAsyncKeyState (VK_SHIFT))  txClear ();
 
-        RenderScreen (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
-                      t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
+        RenderScreen    (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
+                         t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
 
-        Physics  (&Dog1);
-        Physics  (&Dog2);
-        Physics  (&Cat);
+        Physics         (&Dog1);
+        Physics         (&Dog2);
+        Physics         (&Cat);
 
-        Button   (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
+        Button          (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
 
         LeftRightWindow (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
 
-        Touching (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
-                  &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
+        Touching        (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
+                         &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
 
-        Touching (&Cat, &Dog1, "Хотите заново сыграть???",
-                  &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
+        Touching        (&Cat, &Dog1, "Хотите заново сыграть???",
+                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
-        Logic    (&Dog1, &Cat);
+        Logic           (&Dog1, &Cat);
 
-        DrawTime (timeStart);
+        DrawTime        (timeStart);
 
-        if ((GetTickCount() - timeStart)/1000 > TimeGameFast)
-            {
-            int Answer = txMessageBox ("Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ","Game", MB_YESNO);
-            if (Answer == IDYES)
-                {
-                timeStart = GetTickCount();
-
-                txDeleteDC (FonPered);
-                txDeleteDC (FonSer);
-                txDeleteDC (FonZad);
-
-                FonPered = txLoadImage (Level1Pered);
-                FonSer   = txLoadImage (Level1Ser);
-                FonZad   = txLoadImage (Level1Zad);
-
-                Cat.x  = rand()/65;
-                Cat.y  = rand()/65;
-                }
-            else
-                {
-                break;
-                }
-            }
+        UpdateTime      (&Cat, &timeStart, "Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ",
+                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
         txSleep (10);
         t++;
@@ -127,7 +106,7 @@ void Game()
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Downloud (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
+void Downloud     (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
     {
 
     *FonPered = txLoadImage (Level1Pered);
@@ -161,7 +140,7 @@ void RenderScreen (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSaus
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void DrawTime (int timeStart)
+void DrawTime     (int timeStart)
     {
     int time = GetTickCount();
     char Temporary [50] = "";
