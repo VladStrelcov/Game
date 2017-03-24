@@ -3,7 +3,10 @@
 const double Fast          = 0.4;
 const int    TimeGameFast  = 10;
 
-const int    WinX          = 1350,  WinY     = 750;
+const int    Stop          = 0,
+             Continue      = 1;
+
+const int    WinX          = 1350, WinY = 750;
 const int    HeroOfWindow  = 30;
 const int    TimeFact      = 4;
 
@@ -85,18 +88,24 @@ void Game()
 
         LeftRightWindow (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
 
-        Touching        (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
-                         &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
+        int StopGame = Touching    (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
+                                    &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
 
-        Touching        (&Cat, &Dog1, "Хотите заново сыграть???",
-                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
+        StopGame     = Touching    (&Cat, &Dog1, "Хотите заново сыграть???",
+                                    &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
         Logic           (&Dog1, &Cat);
 
         DrawTime        (timeStart);
 
-        UpdateTime      (&Cat, &timeStart, "Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ",
-                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
+        StopGame    = UpdateTime  (&Cat, &timeStart, "Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ",
+                                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
+
+        if (StopGame == Stop)
+            {
+            break;
+            }
+
 
         txSleep (10);
         t++;
