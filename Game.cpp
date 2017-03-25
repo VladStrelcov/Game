@@ -121,7 +121,6 @@ void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2
     *FonSer   = txLoadImage (Level1Ser);
     *FonZad   = txLoadImage (Level1Zad);
     *Dog      = txLoadImage (Player2);
-    *Dog2     = txLoadImage (Player2);
     *Cat      = txLoadImage (Player1);
     *LoveCat  = txLoadImage (LovePlayer);
     *TimeGame = txLoadImage (Scoreboard);
@@ -135,7 +134,7 @@ void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSau
     txBitBlt         (xmap - (*heroCat).x/HeroOfWindow + 50,   ymap - (*heroCat).x/HeroOfWindow,                FonZad);
     txTransparentBlt (xmap, ymap, FonSer);
 
-    txTransparentBlt (txDC(), (*heroDog1).x,    (*heroDog1).y,    (*heroDog1).SizeImageX,    (*heroDog1).SizeImageY,    Dog2,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
+    txTransparentBlt (txDC(), (*heroDog1).x,    (*heroDog1).y,    (*heroDog1).SizeImageX,    (*heroDog1).SizeImageY,    Dog,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
     txTransparentBlt (txDC(), (*heroSausage).x, (*heroSausage).y, (*heroSausage).SizeImageX, (*heroSausage).SizeImageY, LoveCat, (t/TimeFact)%2 * (*heroSausage).SizeImageX);
     txTransparentBlt (txDC(), (*heroCat).x,     (*heroCat).y,     (*heroCat).SizeImageX,     (*heroCat).SizeImageY,     Cat,     (t/TimeFact)%2 * (*heroCat).SizeImageX);
     txTransparentBlt (txDC(), (*heroDog2).x,    (*heroDog2).y,    (*heroDog2).SizeImageX,    (*heroDog2).SizeImageY,    Dog,     (t/TimeFact)%2 * (*heroDog2 ).SizeImageX);
@@ -158,13 +157,4 @@ void DrawTime      (int timeStart)
     txSetColor (TX_YELLOW);
     txDrawText (0, 25, 100, 70, Temporary);
     }
-
-
-
-
-
-
-
-
-
 
