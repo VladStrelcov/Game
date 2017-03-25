@@ -91,6 +91,9 @@ void Game()
         int StopGame = Touching    (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
 
+        StopGame     = Touching    (&Sausage,  &Cat,    "Вы выйграли !!!!!!!!!!!!!!!!",
+                                    &FonPered, &FonSer,  &FonZad, Level1Pered, Level1Ser, Level1Zad);
+
         StopGame     = Touching    (&Cat, &Dog1, "Хотите заново сыграть???",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
