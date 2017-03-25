@@ -28,23 +28,23 @@ const char   Scoreboard[]  = "Ú‡·ÎÓ.bmp";
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Game            ();
+void Game                          ();
 
-void RenderScreen    (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
-                      int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
+void RenderScreen                  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+                                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
 
-void DrawTime        (int timeStart);
+void DrawTime                      (int timeStart);
 
-void Downloud        (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
+void Downloud                      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
 int main()
     {
-    txCreateWindow (WinX, WinY);
-    txBegin();
+    txCreateWindow                 (WinX, WinY);
+    txBegin                        ();
 
-    Game();
+    Game                           ();
 
     return 0;
     }
@@ -64,29 +64,29 @@ void Game()
 
     HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2Image = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
 
-    Downloud            (&FonPered, &FonSer, &FonZad, &Dog, &Dog2Image, &CatImage, &LoveCat, &TimeGame);
+    Downloud                       (&FonPered, &FonSer, &FonZad, &Dog, &Dog2Image, &CatImage, &LoveCat, &TimeGame);
 
 
-    txSelectFont        ("Arial", 35);
+    txSelectFont                   ("Arial", 35);
 
     int timeStart = GetTickCount();
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
-        txSetFillColor  (TX_BLACK);
+        txSetFillColor             (TX_BLACK);
 
-        if (!GetAsyncKeyState (VK_SHIFT))  txClear ();
+        if (!GetAsyncKeyState      (VK_SHIFT))  txClear ();
 
-        RenderScreen    (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
-                         t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
+        RenderScreen               (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
+                                    t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
 
-        Physics         (&Dog1);
-        Physics         (&Dog2);
-        Physics         (&Cat);
+        Physics                    (&Dog1);
+        Physics                    (&Dog2);
+        Physics                    (&Cat);
 
-        Button          (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
+        Button                     (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
 
-        LeftRightWindow (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
+        LeftRightWindow            (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
 
         int StopGame = Touching    (&Sausage,  &Cat,    "’ÓÚËÚÂ ÔÂÂÈÚË Ì‡ 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
@@ -94,18 +94,17 @@ void Game()
         StopGame     = Touching    (&Cat, &Dog1, "’ÓÚËÚÂ Á‡ÌÓ‚Ó Ò˚„‡Ú¸???",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
-        Logic           (&Dog1, &Cat);
+        Logic                      (&Dog1, &Cat);
 
-        DrawTime        (timeStart);
+        DrawTime                   (timeStart);
 
-        StopGame    = UpdateTime  (&Cat, &timeStart, "¬˚ œ–Œ»√–¿À», ‚˚ À”«≈–!!! ",
-                                         &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
+        StopGame    = UpdateTime   (&Cat, &timeStart, "¬˚ œ–Œ»√–¿À», ‚˚ À”«≈–!!! ",
+                                    &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
         if (StopGame == Stop)
             {
             break;
             }
-
 
         txSleep (10);
         t++;
@@ -115,7 +114,7 @@ void Game()
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Downloud     (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
+void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
     {
 
     *FonPered = txLoadImage (Level1Pered);
@@ -129,17 +128,17 @@ void Downloud     (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2,
 
     }
 
-void RenderScreen (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
-                   int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
+void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 
     txBitBlt         (xmap - (*heroCat).x/HeroOfWindow + 50,   ymap - (*heroCat).x/HeroOfWindow,                FonZad);
-    txTransparentBlt (xmap,     ymap,                FonSer);
+    txTransparentBlt (xmap, ymap, FonSer);
 
-    txTransparentBlt (txDC(),   (*heroDog1).x,       (*heroDog1).y,    (*heroDog1).SizeImageX,       (*heroDog1).SizeImageY,    Dog2,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
-    txTransparentBlt (txDC(),   (*heroSausage).x,    (*heroSausage).y, (*heroSausage).SizeImageX,    (*heroSausage).SizeImageY, LoveCat, (t/TimeFact)%2 * (*heroSausage).SizeImageX);
-    txTransparentBlt (txDC(),   (*heroCat).x,        (*heroCat).y,     (*heroCat).SizeImageX,        (*heroCat).SizeImageY,     Cat,     (t/TimeFact)%2 * (*heroCat).SizeImageX);
-    txTransparentBlt (txDC(),   (*heroDog2).x,       (*heroDog2).y,    (*heroDog2).SizeImageX,       (*heroDog2).SizeImageY,    Dog,     (t/TimeFact)%2 * (*heroDog2 ).SizeImageX);
+    txTransparentBlt (txDC(), (*heroDog1).x,    (*heroDog1).y,    (*heroDog1).SizeImageX,    (*heroDog1).SizeImageY,    Dog2,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
+    txTransparentBlt (txDC(), (*heroSausage).x, (*heroSausage).y, (*heroSausage).SizeImageX, (*heroSausage).SizeImageY, LoveCat, (t/TimeFact)%2 * (*heroSausage).SizeImageX);
+    txTransparentBlt (txDC(), (*heroCat).x,     (*heroCat).y,     (*heroCat).SizeImageX,     (*heroCat).SizeImageY,     Cat,     (t/TimeFact)%2 * (*heroCat).SizeImageX);
+    txTransparentBlt (txDC(), (*heroDog2).x,    (*heroDog2).y,    (*heroDog2).SizeImageX,    (*heroDog2).SizeImageY,    Dog,     (t/TimeFact)%2 * (*heroDog2 ).SizeImageX);
 
     txTransparentBlt (xmap + (*heroCat).x/HeroOfWindow - 50,   ymap + (*heroCat).y/HeroOfWindow - 50, FonPered);
 
@@ -149,10 +148,12 @@ void RenderScreen (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSaus
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void DrawTime     (int timeStart)
+void DrawTime      (int timeStart)
     {
-    int time = GetTickCount();
+    int  time           = GetTickCount();
+
     char Temporary [50] = "";
+
     sprintf    (Temporary, "%d", (time-timeStart)/1000);
     txSetColor (TX_YELLOW);
     txDrawText (0, 25, 100, 70, Temporary);
