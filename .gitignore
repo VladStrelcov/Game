@@ -1,3 +1,4 @@
 *.exe
 *.save
-LEONLib.h.save
+*.h.save
+*.cpp.save
