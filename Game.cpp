@@ -1,3 +1,4 @@
+#include "TXNetwork.h"
 #include "TXLib.h"
 
 const double Fast          = 0.4;
@@ -55,12 +56,17 @@ void Game()
     {
 
     Hero Dog1    = {900,  300, 3, 3, 150, 150};
-    Hero Dog2    = {600,  300, 3, 3, 150, 150};
+    Hero Dog2    = {0,    0,   0, 0, 150, 150};
     Hero Cat     = {150,  300, 0, 0, 100, 99};
     Hero Sausage = {1250, 100, 0, 0, 90,  50};
 
+    Network Dog2_network = {0, 0, 0, 0};
+
     int xmap     = 0, ymap   = 0;
     int t        = 0;
+
+    TX_SOCKET Game_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+
 
     HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2Image = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
 
@@ -74,6 +80,10 @@ void Game()
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
         txSetFillColor             (TX_BLACK);
+
+
+        txRecvFrom (Game_server, &Dog2_network, sizeof(Dog2_network));
+
 
         if (!GetAsyncKeyState      (VK_SHIFT))  txClear ();
 

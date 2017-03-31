@@ -7,6 +7,7 @@ struct Hero
 struct Network
     {
     int x,  y;
+    int vx, vy;
     };
 
 void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero);
