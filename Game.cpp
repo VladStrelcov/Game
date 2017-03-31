@@ -91,7 +91,7 @@ void Game()
                                     t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
 
         Physics                    (&Dog1);
-        Physics                    (&Dog2);
+        //Physics                    (&Dog2);
         Physics                    (&Cat);
 
         Button                     (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);

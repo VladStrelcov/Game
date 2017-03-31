@@ -10,7 +10,7 @@
 //!             $Copyright: (C) _RedMan_ (Vova Yrovsky) <vova@txlib.ru> $
 //}===========================================================================
 
-#include "../../TXNetwork.h"
+#include "TXNetwork.h"
 #include "TXLib.h"
 
 //1. server -> broadcast: Ball_t

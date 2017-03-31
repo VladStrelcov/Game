@@ -18,7 +18,6 @@ int main ()
     {
     txCreateWindow (1350, 750);
 
-    Hero    Dog2          = {600, 300, 3, 3};
     Network Dog2_network  = {600, 300, 3, 3};
 
 
@@ -38,13 +37,16 @@ int main ()
 
         txSendTo (Game_client, &Dog2_network, sizeof(Dog2_network));
 
-        //if (!GetAsyncKeyState (VK_SHIFT))  txClear ();
+        txSetColor (TX_BLACK);
+        txSetFillColor (TX_BLACK);
 
         txCircle (Dog2_network.x, Dog2_network.y, 10);
 
         Physics  (&Dog2_network);
 
         Sleep (10);
+        txSetFillColor (TX_YELLOW);
+        txClear ();
         }
 
     }
