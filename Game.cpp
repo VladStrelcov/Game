@@ -178,7 +178,7 @@ void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSau
                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 
-    txBitBlt         (xmap - (*heroCat).x/HeroOfWindow + 50,   ymap - (*heroCat).x/HeroOfWindow,                FonZad);
+    txBitBlt         (xmap - ROUND ((*heroCat).x/HeroOfWindow) + 50,   ymap - ROUND ((*heroCat).x/HeroOfWindow),                FonZad);
     txTransparentBlt (xmap, ymap, FonSer);
 
     txTransparentBlt (txDC(), (*heroDog1).x,    (*heroDog1).y,    (*heroDog1).SizeImageX,    (*heroDog1).SizeImageY,    Dog,    (t/TimeFact)%2 * (*heroDog1).SizeImageX);
@@ -186,7 +186,7 @@ void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSau
     txTransparentBlt (txDC(), (*heroCat).x,     (*heroCat).y,     (*heroCat).SizeImageX,     (*heroCat).SizeImageY,     Cat,     (t/TimeFact)%2 * (*heroCat).SizeImageX);
     txTransparentBlt (txDC(), (*heroDog2).x,    (*heroDog2).y,    (*heroDog2).SizeImageX,    (*heroDog2).SizeImageY,    Dog,     (t/TimeFact)%2 * (*heroDog2 ).SizeImageX);
 
-    txTransparentBlt (xmap + (*heroCat).x/HeroOfWindow - 50,   ymap + (*heroCat).y/HeroOfWindow - 50, FonPered);
+    txTransparentBlt (xmap + ROUND ((*heroCat).x/HeroOfWindow) - 50,   ymap + ROUND ((*heroCat).y/HeroOfWindow) - 50, FonPered);
 
     txTransparentBlt (txDC(), 0, 0, 100, 70, TimeGame);
 
