@@ -7,17 +7,16 @@ struct Hero
 struct Network
     {
     int x,  y;
-    int vx, vy;
     };
 
-void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero);
+void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero, Hero* Sausage);
 
 void Physics         (Hero* hero);
 
-void Logic           (Hero* hero,  Hero* hero2, int *vx, int *vy);
+void Logic           (Hero* hero,  Hero* hero2);
 
 int  Touching        (Hero* hero, Hero* hero2, char BoxAnswer[],
-                      HDC *FonPered, HDC *FonSer, HDC *FonZad, char PeredName[], char SerName[], char ZadName[]);
+                      HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[]);
 
 int  UpdateTime      (Hero* hero, int *timeStart, char BoxAnswer[],
                       HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[]);
@@ -111,6 +110,7 @@ int   Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
 
         }
 
+    return Continue;
     }
 
 int  UpdateTime (Hero* hero, int *timeStart, char BoxAnswer[],
@@ -145,7 +145,7 @@ int  UpdateTime (Hero* hero, int *timeStart, char BoxAnswer[],
     return Continue;
     }
 
-void LeftRightWindow (int Left, int Right, int *xmap, int *ymap)
+void LeftRightWindow (int Left, int Right, int *xmap, int */*ymap*/)
     {
 
     if (GetAsyncKeyState (Left))

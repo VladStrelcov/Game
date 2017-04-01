@@ -12,16 +12,17 @@ const int    Stop          = 0,
 const int    HeroOfWindow  = 30;
 const int    TimeFact      = 4;
 #include "LEONLib.h"
-void Physics (Network* hero);
+
 
 int main ()
     {
     txCreateWindow (1350, 750);
+    txBegin();
 
-    Network Dog2_network  = {600, 300, 3, 3};
+    Hero Dog2 = {600, 300, 30, 30};
 
 
-    TX_SOCKET Game_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+    TX_SOCKET Game_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false, 1);
 
     if (txnAssert (Game_client) == TXN_NOT_CREATED)
         {
@@ -35,48 +36,26 @@ int main ()
         {
 
 
+
+        txSetFillColor (TX_BLACK);
+        txClear ();
+
+        txSetFillColor (TX_YELLOW);
+        txCircle (Dog2.x, Dog2.y, 10);
+
+        Physics  (&Dog2);
+
+        Network Dog2_network  = {Dog2.x, Dog2.y};
+
         txSendTo (Game_client, &Dog2_network, sizeof(Dog2_network));
 
-        txSetColor (TX_BLACK);
-        txSetFillColor (TX_BLACK);
+        while (GetAsyncKeyState (VK_CONTROL)) Sleep (100);
 
-        txCircle (Dog2_network.x, Dog2_network.y, 10);
-
-        Physics  (&Dog2_network);
-
-        Sleep (10);
-        txSetFillColor (TX_YELLOW);
-        txClear ();
+        txSleep (10);
         }
 
     }
 
 
 
-void Physics (Network* hero)
-    {
 
-    (*hero).x = ROUND ((*hero).x + (*hero).vx * Fast);
-    (*hero).y = ROUND ((*hero).y + (*hero).vy * Fast);
-
-    if ((*hero).y >= WinY - 50)
-        {
-        (*hero).vy = -(*hero).vy;
-        }
-
-    if ((*hero).x >= WinX - 50)
-        {
-        (*hero).vx = -(*hero).vx;
-        }
-
-    if ((*hero).x <= 50)
-        {
-        (*hero).vx = -(*hero).vx;
-        }
-
-    if ((*hero).y <= 50)
-        {
-        (*hero).vy = -(*hero).vy;
-        }
-
-    }

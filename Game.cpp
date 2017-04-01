@@ -32,11 +32,15 @@ const char   Scoreboard[]  = "табло.bmp";
 void Game                          ();
 
 void RenderScreen                  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
-                                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
+                                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
 
 void DrawTime                      (int timeStart);
 
-void Downloud                      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
+void Downloud                      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
+
+void Receive (void*);
+
+volatile Network Dog2_network = {-1, -1};
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -55,62 +59,75 @@ int main()
 void Game()
     {
 
-    Hero Dog1    = {900,  300, 3, 3, 150, 150};
-    Hero Dog2    = {0,    0,   0, 0, 150, 150};
-    Hero Cat     = {150,  300, 0, 0, 100, 99};
-    Hero Sausage = {1250, 100, 0, 0, 90,  50};
 
-    Network Dog2_network = {0, 0, 0, 0};
+    Hero    Dog1         = {900,  300, 3, 3, 150, 150};
+    Hero    Cat          = {150,  300, 0, 0, 100, 99};
+    Hero    Sausage      = {1250, 100, 0, 0, 90,  50};
 
     int xmap     = 0, ymap   = 0;
     int t        = 0;
 
-    TX_SOCKET Game_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+    HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
 
+    Downloud                       (&FonPered, &FonSer, &FonZad, &Dog, &CatImage, &LoveCat, &TimeGame);
 
-    HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2Image = NULL, CatImage = NULL, LoveCat = NULL, TimeGame = NULL;
-
-    Downloud                       (&FonPered, &FonSer, &FonZad, &Dog, &Dog2Image, &CatImage, &LoveCat, &TimeGame);
-
+    _beginthread (Receive, 0, NULL);
 
     txSelectFont                   ("Arial", 35);
 
     int timeStart = GetTickCount();
 
+
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
         txSetFillColor             (TX_BLACK);
 
-
-        txRecvFrom (Game_server, &Dog2_network, sizeof(Dog2_network));
-
+        //
+        //
 
         if (!GetAsyncKeyState      (VK_SHIFT))  txClear ();
 
-        RenderScreen               (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
-                                    t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
+        Hero Dog2 = { Dog2_network.x, Dog2_network.y, 0, 0, Dog1.SizeImageX, Dog1.SizeImageY };
+
+        RenderScreen               (&Cat, &Dog1, &Dog2, &Sausage, xmap, ymap,
+                                    t, FonZad, FonSer, Dog, LoveCat, CatImage, FonPered, TimeGame);
 
         Physics                    (&Dog1);
-        //Physics                    (&Dog2);
+      //Physics                    (&Dog2);
         Physics                    (&Cat);
 
         Button                     (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
 
         LeftRightWindow            (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
-
+       /*
         int StopGame = Touching    (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
 
-        StopGame     = Touching    (&Sausage,  &Cat,    "Вы выйграли !!!!!!!!!!!!!!!!",
+        if (StopGame == Stop)
+            {
+            break;
+            }
+
+        StopGame     = Touching    (&Sausage,  &Cat,    "Вы выиграли !!!!!!!!!!!!!!!!",
                                     &FonPered, &FonSer,  &FonZad, Level1Pered, Level1Ser, Level1Zad);
+
+        if (StopGame == Stop)
+            {
+            break;
+            }
 
         StopGame     = Touching    (&Cat, &Dog1, "Хотите заново сыграть???",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
+        if (StopGame == Stop)
+            {
+            break;
+            }
+         */
         Logic                      (&Dog1, &Cat);
 
         DrawTime                   (timeStart);
-
+       /*
         StopGame    = UpdateTime   (&Cat, &timeStart, "Вы ПРОИГРАЛИ, вы ЛУЗЕР!!! ",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
@@ -118,6 +135,9 @@ void Game()
             {
             break;
             }
+         */
+
+        while (GetAsyncKeyState (VK_SHIFT)) Sleep (100);
 
         txSleep (10);
         t++;
@@ -127,7 +147,21 @@ void Game()
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
+void Receive (void*)
+    {
+    TX_SOCKET Game_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+
+    for (;;)
+        {
+        txRecvFrom (Game_server, (void*) &Dog2_network, sizeof (Dog2_network));
+
+        Sleep (0);
+        }
+     }
+
+//===================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
     {
 
     *FonPered = txLoadImage (Level1Pered);
@@ -141,7 +175,7 @@ void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2
     }
 
 void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
-                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
+                    int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 
     txBitBlt         (xmap - (*heroCat).x/HeroOfWindow + 50,   ymap - (*heroCat).x/HeroOfWindow,                FonZad);
