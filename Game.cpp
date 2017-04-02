@@ -99,6 +99,12 @@ void Game()
         Button                     (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
 
         LeftRightWindow            (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
+        int StopGame = Touching    (&Sausage,  &Dog2,    "Хотите перейти на 2 level???",
+                                    &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
+        if (StopGame == Stop)
+            {
+            break;
+            }
        /*
         int StopGame = Touching    (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
