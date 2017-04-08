@@ -9,6 +9,8 @@ struct Network
     int x,  y;
     };
 
+//=====================================================================================================================================
+
 void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero, Hero* Sausage);
 
 void Physics         (Hero* hero);
