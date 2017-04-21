@@ -29,7 +29,7 @@ const char   Scoreboard[]  = "табло.bmp";
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Game                          ();
+void Capture_the_Sausage           ();
 
 void RenderScreen                  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
                                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
@@ -49,14 +49,14 @@ int main()
     txCreateWindow                 (WinX, WinY);
     txBegin                        ();
 
-    Game                           ();
+    Capture_the_Sausage            ();
 
     return 0;
     }
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Game()
+void Capture_the_Sausage()
     {
 
 
@@ -155,11 +155,11 @@ void Game()
 
 void Receive (void*)
     {
-    TX_SOCKET Game_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+    TX_SOCKET Capture_the_Sausage_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
 
     for (;;)
         {
-        txRecvFrom (Game_server, (void*) &Dog2_network, sizeof (Dog2_network));
+        txRecvFrom (Capture_the_Sausage_server, (void*) &Dog2_network, sizeof (Dog2_network));
 
         Sleep (0);
         }

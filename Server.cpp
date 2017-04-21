@@ -32,9 +32,9 @@ int main ()
     Hero Circle   = {1250, 100, 0,  0, 90, 50};
     int t         = 0;
 
-    TX_SOCKET Game_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false, 1);
+    TX_SOCKET Capture_the_Sausage_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false, 1);
 
-    if (txnAssert (Game_client) == TXN_NOT_CREATED)
+    if (txnAssert (Capture_the_Sausage_client) == TXN_NOT_CREATED)
         {
 
         printf("Can't create server. Maybe, port are busy.\nn");
@@ -62,7 +62,7 @@ int main ()
 
         Network Dog2_network  = {Dog2.x, Dog2.y};
 
-        txSendTo (Game_client, &Dog2_network, sizeof(Dog2_network));
+        txSendTo (Capture_the_Sausage_client, &Dog2_network, sizeof(Dog2_network));
 
         while (GetAsyncKeyState (VK_CONTROL)) Sleep (100);
 
