@@ -15,7 +15,7 @@ const char   Level1Pered[] = "тропинка_перед.bmp";
 const char   Level1Ser[]   = "тропинка_середина.bmp";
 const char   Level1Zad[]   = "тропинка_зад.bmp";
 
-const char   Level2Pered[] = "Ёверест_перед.bmp";
+const char   Level2Pered[] = "Ёверест_перед.bmp";      // "Ёверест/Ёверест_перед.bmp";
 const char   Level2Ser[]   = "Ёверест_середина.bmp";
 const char   Level2Zad[]   = "Ёверест_зад.bmp";
 
