@@ -1,7 +1,10 @@
+
+//для доклада
+
 #include "TXLib.h"
 
 const double Fast          = 0.4;
-const int    TimeGameFast  = 10;
+const int    TimeGameFast  = 40;
 
 const int    Stop          = 0,
              Continue      = 1;
@@ -90,9 +93,6 @@ void Game()
 
         int StopGame = Touching    (&Sausage,  &Cat,    "Хотите перейти на 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
-
-        StopGame     = Touching    (&Sausage,  &Cat,    "Вы выйграли !!!!!!!!!!!!!!!!",
-                                    &FonPered, &FonSer,  &FonZad, Level1Pered, Level1Ser, Level1Zad);
 
         StopGame     = Touching    (&Cat, &Dog1, "Хотите заново сыграть???",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
