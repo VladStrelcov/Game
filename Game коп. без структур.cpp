@@ -1,4 +1,4 @@
-#include "lib/TXLib.h"
+#include "Books/TXLib.h"
 
 const double Fast          = 0.4;
 const int    TimeGameFast  = 10;
@@ -11,21 +11,21 @@ const int    Sausagex      = 1250,  Sausagey = 100;
 const int    Hero          = 30;
 const int    TimeFact      = 4;
 
-const char   Level1Pered[] = "Картинки/Тропинка/тропинка_перед.bmp";
-const char   Level1Ser[]   = "Картинки/Тропинка/тропинка_середина.bmp";
-const char   Level1Zad[]   = "Картинки/Тропинка/тропинка_зад.bmp";
+const char   Level1Pered[] = "Image/Тропинка/тропинка_перед.bmp";
+const char   Level1Ser[]   = "Image/Тропинка/тропинка_середина.bmp";
+const char   Level1Zad[]   = "Image/Тропинка/тропинка_зад.bmp";
 
-const char   Level2Pered[] = "Картинки/Эверест/Эверест_перед.bmp";
-const char   Level2Ser[]   = "Картинки/Эверест/Эверест_середина.bmp";
-const char   Level2Zad[]   = "Картинки/Эверест/Эверест_зад.bmp";
+const char   Level2Pered[] = "Image/Эверест/Эверест_перед.bmp";
+const char   Level2Ser[]   = "Image/Эверест/Эверест_середина.bmp";
+const char   Level2Zad[]   = "Image/Эверест/Эверест_зад.bmp";
 
-const char   Player1[]     = "Картинки/Герои/кошка.bmp";
-const char   Player2[]     = "Картинки/Герои/ерк3.bmp";
+const char   Player1[]     = "Image/Герои/кошка.bmp";
+const char   Player2[]     = "Image/Герои/ерк3.bmp";
 
-const char   LovePlayer[]  = "Картинки/Герои/колбаса.bmp";
-const char   Scoreboard[]  = "Картинки/Герои/табло.bmp";
+const char   LovePlayer[]  = "Image/Герои/колбаса.bmp";
+const char   Scoreboard[]  = "Image/Герои/табло.bmp";
 
-#include "lib/LEONLib коп. без структур.h"
+#include "Books/LEONLib коп. без структур.h"
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
