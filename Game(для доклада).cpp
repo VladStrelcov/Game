@@ -33,7 +33,7 @@ const char   Scoreboard[]  = "Image/Герои/табло.bmp";
 
 void Game                          ();
 
-void RenderScreen                  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+void Image                         (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
                                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
 
 void DrawTime                      (int timeStart);
@@ -80,7 +80,7 @@ void Game()
 
         if (!GetAsyncKeyState      (VK_SHIFT))  txClear ();
 
-        RenderScreen               (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
+        Image                      (&Cat, &Dog2, &Dog1, &Sausage, xmap, ymap,
                                     t, FonZad, FonSer, Dog, Dog2Image, LoveCat, CatImage, FonPered, TimeGame);
 
         Physics                    (&Dog1);
@@ -130,7 +130,7 @@ void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2
 
     }
 
-void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+void Image         (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 

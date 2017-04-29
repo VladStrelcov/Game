@@ -31,7 +31,7 @@ const char   Scoreboard[]  = "Image/Герои/табло.bmp";
 
 void Capture_the_Sausage           ();
 
-void RenderScreen                  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+void Image                         (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
                                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
 
 void DrawTime                      (int timeStart);
@@ -82,14 +82,12 @@ void Capture_the_Sausage()
         {
         txSetFillColor             (TX_BLACK);
 
-        //
-        //
 
         if (!GetAsyncKeyState      (VK_SHIFT))  txClear ();
 
         Hero Dog2 = { Dog2_network.x, Dog2_network.y, 0, 0, Dog1.SizeImageX, Dog1.SizeImageY };
 
-        RenderScreen               (&Cat, &Dog1, &Dog2, &Sausage, xmap, ymap,
+        Image                      (&Cat, &Dog1, &Dog2, &Sausage, xmap, ymap,
                                     t, FonZad, FonSer, Dog, LoveCat, CatImage, FonPered, TimeGame);
 
         Physics                    (&Dog1);
@@ -180,7 +178,7 @@ void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Cat,
 
     }
 
-void RenderScreen  (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
+void Image         (Hero* heroCat, Hero* heroDog2, Hero* heroDog1, Hero* heroSausage, int xmap, int ymap,
                     int t, HDC FonZad, HDC FonSer, HDC Dog, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 

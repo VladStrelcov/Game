@@ -31,12 +31,12 @@ const char   Scoreboard[]  = "Image/Герои/табло.bmp";
 
 void Game            ();
 
-void RenderScreen    (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
+void Image           (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
                       int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame);
 
 void DrawTime        (int timeStart);
 
-void Downloud (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
+void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Cat, HDC *LoveCat, HDC *TimeGame);
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -62,7 +62,7 @@ void Game()
 
     HDC FonPered = NULL, FonSer = NULL, FonZad = NULL, Dog = NULL, Dog2 = NULL, Cat = NULL, LoveCat = NULL, TimeGame = NULL;
 
-    Downloud (&FonPered, &FonSer, &FonZad, &Dog, &Dog2, &Cat, &LoveCat, &TimeGame);
+    Downloud     (&FonPered, &FonSer, &FonZad, &Dog, &Cat, &LoveCat, &TimeGame);
 
     txSelectFont ("Arial", 35);
 
@@ -74,8 +74,8 @@ void Game()
 
         if (!GetAsyncKeyState (VK_SHIFT))  txClear ();
 
-        RenderScreen (Dog1x, Dog1y, Dog2x, Dog2y, Catx, Caty, xmap, ymap,
-                      t, FonZad, FonSer, Dog, Dog2, LoveCat, Cat, FonPered, TimeGame);
+        Image    (Dog1x, Dog1y, Dog2x, Dog2y, Catx, Caty, xmap, ymap,
+                  t, FonZad, FonSer, Dog, Dog2, LoveCat, Cat, FonPered, TimeGame);
 
         Physics  (&Dog1x, &Dog1y, &Dog1vx, &Dog1vy);
         Physics  (&Dog2x, &Dog2y, &Dog2vx, &Dog2vy);
@@ -116,22 +116,21 @@ void Game()
 
 //===================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-void Downloud (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Dog2, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
+void Downloud      (HDC *FonPered, HDC *FonSer, HDC *FonZad, HDC *Dog, HDC *Cat, HDC *LoveCat, HDC *TimeGame)
     {
 
     *FonPered = txLoadImage (Level1Pered);
     *FonSer   = txLoadImage (Level1Ser);
-    *FonZad   = txLoadImage (Leve1lZad);
+    *FonZad   = txLoadImage (Level1Zad);
     *Dog      = txLoadImage (Player2);
-    *Dog2     = txLoadImage (Player2);
     *Cat      = txLoadImage (Player1);
     *LoveCat  = txLoadImage (LovePlayer);
     *TimeGame = txLoadImage (Scoreboard);
 
     }
 
-void RenderScreen (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
-                   int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
+void Image    (int Dog1x, int Dog1y, int Dog2x, int Dog2y, int Catx, int Caty, int xmap, int ymap,
+               int t, HDC FonZad, HDC FonSer, HDC Dog, HDC Dog2, HDC LoveCat, HDC Cat, HDC FonPered, HDC TimeGame)
     {
 
     txBitBlt         (xmap - Catx/Hero + 50,   ymap - Catx/Hero,                FonZad);
