@@ -1,5 +1,5 @@
-#include "TXNetwork.h"
-#include "TXLib.h"
+#include "lib/TXNetwork.h"
+#include "lib/TXLib.h"
 
 const double Fast          = 0.4;
 const int    TimeGameFast  = 10;
@@ -11,21 +11,21 @@ const int    WinX          = 1350, WinY = 750;
 const int    HeroOfWindow  = 30;
 const int    TimeFact      = 4;
 
-const char   Level1Pered[] = "тропинка_перед.bmp";
-const char   Level1Ser[]   = "тропинка_середина.bmp";
-const char   Level1Zad[]   = "тропинка_зад.bmp";
+const char   Level1Pered[] = "Картинки/Тропинка/тропинка_перед.bmp";
+const char   Level1Ser[]   = "Картинки/Тропинка/тропинка_середина.bmp";
+const char   Level1Zad[]   = "Картинки/Тропинка/тропинка_зад.bmp";
 
-const char   Level2Pered[] = "Эверест_перед.bmp";      // "Эверест/Эверест_перед.bmp";
-const char   Level2Ser[]   = "Эверест_середина.bmp";
-const char   Level2Zad[]   = "Эверест_зад.bmp";
+const char   Level2Pered[] = "Картинки/Эверест/Эверест_перед.bmp";
+const char   Level2Ser[]   = "Картинки/Эверест/Эверест_середина.bmp";
+const char   Level2Zad[]   = "Картинки/Эверест/Эверест_зад.bmp";
 
-const char   Player1[]     = "кошка.bmp";
-const char   Player2[]     = "ерк3.bmp";
+const char   Player1[]     = "Картинки/Герои/кошка.bmp";
+const char   Player2[]     = "Картинки/Герои/ерк3.bmp";
 
-const char   LovePlayer[]  = "колбаса.bmp";
-const char   Scoreboard[]  = "табло.bmp";
+const char   LovePlayer[]  = "Картинки/Герои/колбаса.bmp";
+const char   Scoreboard[]  = "Картинки/Герои/табло.bmp";
 
-#include "LEONLib.h"
+#include "lib/LEONLib.h"
 
 //==================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
