@@ -1,6 +1,6 @@
 
-#include "TXNetwork.h"
-#include "TXLib.h"
+#include "Books/TXNetwork.h"
+#include "Books/TXLib.h"
 
 const double Fast          = 0.4;
 const int    TimeGameFast  = 10;
@@ -12,10 +12,14 @@ const int    Stop          = 0,
 const int    HeroOfWindow  = 30;
 const int    TimeFact      = 4;
 
-const char   LovePlayer[]  = "колбаса.bmp";
-const char   Level2Zad[]   = "Эверест_зад.bmp";
 
-#include "LEONLib.h"
+const char   Level2Zad[]   = "Image/Эверест/Эверест_зад.bmp";
+
+const char   LovePlayer[]  = "Image/Герои/колбаса.bmp";
+
+
+#include "Books/LEONLib.h"
+
 
 
 int main ()
@@ -23,14 +27,15 @@ int main ()
     txCreateWindow (1350, 750);
     txBegin();
 
-    HDC LoveCat   = txLoadImage (LovePlayer);
-    HDC FonPered  = txLoadImage (Level2Zad);
-    HDC FonSer    = txLoadImage (Level2Zad);
-    HDC FonZad    = txLoadImage (Level2Zad);
+
 
     Hero Dog2     = {600,  300, 15, 15};
     Hero Circle   = {1250, 100, 0,  0, 90, 50};
     int t         = 0;
+
+    HDC FonPered = txLoadImage (Level2Pered);
+    HDC FonSer   = txLoadImage (Level2Ser);
+    HDC FonZad   = txLoadImage (Level2Zad);
 
     TX_SOCKET Capture_the_Sausage_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false, 1);
 
@@ -44,6 +49,7 @@ int main ()
 
     while (!GetAsyncKeyState (VK_F12))
         {
+
 
         Button ('W', 'S', 'D', 'A', 'E', 'Q', &Dog2, &Circle);
 
@@ -70,7 +76,6 @@ int main ()
         }
 
     }
-
 
 
 

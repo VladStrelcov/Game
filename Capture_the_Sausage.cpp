@@ -91,18 +91,19 @@ void Capture_the_Sausage()
                                     t, FonZad, FonSer, Dog, LoveCat, CatImage, FonPered, TimeGame);
 
         Physics                    (&Dog1);
-      //Physics                    (&Dog2);
         Physics                    (&Cat);
 
         Button                     (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Cat, &Sausage);
 
         LeftRightWindow            (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
-        int StopGame = Touching    (&Sausage,  &Dog2,    "Õמעטעו ןונויעט םא 2 level???",
+
+        int StopGame = Touching    (&Sausage,  &Dog1,    "Õמעטעו ןונויעט םא 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
         if (StopGame == Stop)
             {
             break;
             }
+
        /*
         int StopGame = Touching    (&Sausage,  &Cat,    "Õמעטעו ןונויעט םא 2 level???",
                                     &FonPered, &FonSer,  &FonZad, Level2Pered, Level2Ser, Level2Zad);
@@ -128,9 +129,11 @@ void Capture_the_Sausage()
             break;
             }
          */
+
         Logic                      (&Dog1, &Cat);
 
         DrawTime                   (timeStart);
+
        /*
         StopGame    = UpdateTime   (&Cat, &timeStart, "Âû ÏÐÎÈÃÐÀËÈ, גû ËÓÇÅÐ!!! ",
                                     &FonPered,  &FonSer, &FonZad, Level1Pered, Level1Ser, Level1Zad);
