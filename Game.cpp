@@ -1,10 +1,5 @@
 #include "Books/TXLib.h"
 
-struct Function
-    {
-
-    };
-
 const int    WinX = 1350, WinY = 750;
 
 const int    TimeGameFast  = 10;
@@ -13,20 +8,19 @@ const int    HeroOfWindow  = 30;
 
 const int    TimeFact      = 4;
 
-const double Fast  = 0.4;
+const double Fast          = 0.4;
 
 const int    Stop          = 0,
              Continue      = 1;
 
 const char   Player[]      = "Image/Герои/ерк3.bmp";
 const char   Player2[]     = "Image/stop.bmp";
+const char   Player3[]     = "Image/Герои/кошка.bmp";
 
 
 #include "Books/LEONLib.h"
 
 void Game ();
-
-void Image (Hero heroPlayer, Hero heroStop);
 
 
 int main ()
@@ -39,38 +33,33 @@ int main ()
 
 void Game ()
     {
-    Hero Circle {243,  400, 2, 3, 150, 150, txLoadImage (Player)};
-    Hero Stop   {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+    Hero Dog    {243,  400, 2, 3, 150, 150, txLoadImage (Player) };
+    Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+    Hero Cat    {500,  500, 5, 3, 100, 99,  txLoadImage (Player3)};
 
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
         txSetFillColor (TX_BLACK);
 
-        if      (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
+        if           (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
 
-        Image   (Circle, Stop);
+        Dog.Photo    ();
+        Dog.Physics  ();
 
-        Physics (&Circle);
+        Brick.Photo  ();
 
-        Button  (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Circle, &Stop);
+        Cat.Photo    ();
+        Cat.Physics  ();
+        Cat.Button   (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Brick);
 
-/*
-        Touching    (&Circle,  &Stop, "Вы выиграли !!!!!!!!!!!!!!!!",
-                    &FonPered, &FonSer,  &FonZad, Level1Pered, Level1Ser, Level1Zad);
-*/
+        Logic        (&Dog, &Cat);
 
-        txSleep (25);
+        txSleep      (25);
         }
 
     }
 
 
-void Image (Hero heroPlayer, Hero heroStop)
-    {
 
-    txTransparentBlt (txDC(), heroPlayer.x, heroPlayer.y, heroPlayer.SizeImageX, heroPlayer.SizeImageY, heroPlayer.Image);
-    txTransparentBlt (txDC(), heroStop.x,   heroStop.y,   heroStop.SizeImageX,   heroStop.SizeImageY,   heroStop.Image);
-
-    }
 

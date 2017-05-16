@@ -1,19 +1,23 @@
+
 struct Hero
     {
     int x,  y;
     int vx, vy;
     int SizeImageX, SizeImageY;
+
+    HDC Image;
+
+    void Photo   ();
+    void Physics ();
+    void Button  (int up, int down, int right, int left, int stop, int crax, Hero* Sausage);
     };
+
 struct Network
     {
     int x,  y;
     };
 
 //=====================================================================================================================================
-
-void Button          (int up, int down, int right, int left, int stop, int crax, Hero* hero, Hero* Sausage);
-
-void Physics         (Hero* hero);
 
 void Logic           (Hero* hero,  Hero* hero2);
 
@@ -27,63 +31,70 @@ void LeftRightWindow (int Left, int Right, int *xmap, int *ymap);
 
 //=====================================================================================================================================
 
-void Button (int up, int down, int right, int left, int stop, int crax, Hero* hero, Hero* Sausage)
+void Hero::Button (int up, int down, int right, int left, int stop, int crax, Hero* Sausage)
     {
 
-    if (GetAsyncKeyState (up))    ((*hero).vy)--;
-    if (GetAsyncKeyState (down))  ((*hero).vy)++;
-    if (GetAsyncKeyState (left))  ((*hero).vx)--;
-    if (GetAsyncKeyState (right)) ((*hero).vx)++;
-    if (GetAsyncKeyState (stop))  ((*hero).vx) = ((*hero).vy) = 0;
+    if (GetAsyncKeyState (up))    (vy)--;
+    if (GetAsyncKeyState (down))  (vy)++;
+    if (GetAsyncKeyState (left))  (vx)--;
+    if (GetAsyncKeyState (right)) (vx)++;
+    if (GetAsyncKeyState (stop))  (vx) = (vy) = 0;
 
     if (GetAsyncKeyState (crax))
        {
-       (*hero).x = (*Sausage).x;
-       (*hero).y = (*Sausage).y;
+       x = (*Sausage).x;
+       y = (*Sausage).y;
        }
     }
 
-void Physics (Hero* hero)
+void Hero::Physics ()
     {
 
-    (*hero).x = ROUND ((*hero).x + (*hero).vx * Fast);
-    (*hero).y = ROUND ((*hero).y + (*hero).vy * Fast);
+    x = ROUND (x + vx * Fast);
+    y = ROUND (y + vy * Fast);
 
-    if ((*hero).y >= WinY - 50)
+    if (y >= WinY - 50)
         {
-        (*hero).vy = -(*hero).vy;
+        vy = -vy;
         }
 
-    if ((*hero).x >= WinX - 50)
+    if (x >= WinX - 50)
         {
-        (*hero).vx = -(*hero).vx;
+        vx = -vx;
         }
 
-    if ((*hero).x <= 50)
+    if (x <= 50)
         {
-        (*hero).vx = -(*hero).vx;
+        vx = -vx;
         }
 
-    if ((*hero).y <= 50)
+    if (y <= 50)
         {
-        (*hero).vy = -(*hero).vy;
+        vy = -vy;
         }
+
+    }
+
+void Hero::Photo ()
+    {
+
+    txTransparentBlt (txDC(), x, y, SizeImageX, SizeImageY, Image, 0, 0, TX_WHITE);
 
     }
 
 void Logic ( Hero* hero,  Hero* hero2)
     {
 
-    (*hero).vx = -((*hero).x - (*hero2).x) / 15;
-    (*hero).vy = -((*hero).y - (*hero2).y) / 15;
+    hero->vx = -(hero->x - hero2->x) / 15;
+    hero->vy = -(hero->y - hero2->y) / 15;
 
     }
 
-int   Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
-                HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[])
+int  Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
+               HDC *FonPered, HDC *FonSer, HDC *FonZad, const char PeredName[], const char SerName[], const char ZadName[])
     {
 
-    double Distance = sqrt ( ((*hero).x - (*hero2).x) * ((*hero).x - (*hero2).x) + ((*hero).y - (*hero2).y) * ((*hero).y - (*hero2).y));
+    double Distance = sqrt ( (hero->x - hero2->x) * (hero->x - hero2->x) + (hero->y - hero2->y) * (hero->y - hero2->y));
 
     if (Distance <= 50)
         {
@@ -100,8 +111,8 @@ int   Touching (Hero* hero, Hero* hero2, char BoxAnswer[],
             *FonSer   = txLoadImage (SerName);
             *FonZad   = txLoadImage (ZadName);
 
-            (*hero2).x  = rand()/65;
-            (*hero2).y  = rand()/65;
+            hero2->x  = rand()/65;
+            hero2->y  = rand()/65;
 
             return Continue;
             }
@@ -133,8 +144,8 @@ int  UpdateTime (Hero* hero, int *timeStart, char BoxAnswer[],
                     *FonSer   = txLoadImage (SerName);
                     *FonZad   = txLoadImage (ZadName);
 
-                    (*hero).x  = rand()/65;
-                    (*hero).y  = rand()/65;
+                    hero->x  = rand()/65;
+                    hero->y  = rand()/65;
 
                     return Continue;
                     }
