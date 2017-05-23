@@ -34,13 +34,22 @@ int main ()
 
 void Game ()
     {
-    Hero Dog    {243,  400, 2, 3, 150, 150, txLoadImage (Player) };
+    Hero Dog    {0,    0,   0, 0, 150, 150, txLoadImage (Player)};
+    Hero Dog2   {123,  50,  2, 5, 150, 150, txLoadImage (Player)};
     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
     Hero Cat    {500,  500, 5, 3, 100, 99,  txLoadImage (Player3)};
 
+    TX_SOCKET Dog_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
+
+    if (txnAssert (Dog_server) == TXN_NOT_CREATED)
+    {
+    printf ("Can't create listener. Maybe, port are busy.\n");
+    }
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
+        txRecvFrom (Dog_server, &Dog, sizeof(Dog));
+
         txSetFillColor (TX_BLACK);
 
         if           (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
@@ -48,15 +57,20 @@ void Game ()
         Dog.Photo    ();
         Dog.Physics  ();
 
+        Logic        (&Dog2, &Cat);
+
+        Dog2.Photo   ();
+        Dog2.Physics ();
+
+
         Brick.Photo  ();
 
         Cat.Photo    ();
         Cat.Physics  ();
         Cat.Button   (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Brick);
 
-        txSleep      (25);
+        txSleep      (0);
         }
-
     }
 
 
