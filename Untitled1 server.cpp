@@ -35,11 +35,11 @@ int main ()
 void Server ()
     {
     Hero Cat    {100,  100, 2, 3, 100, 99,  txLoadImage (Player3)};
+    Hero Dog    {0,    0,   0, 0, 150, 150, txLoadImage (Player)};
     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
-    Hero Dog    {500,  500, 5, 3, 150, 150, txLoadImage (Player)};
-    Hero Dog2   {500,  800, 5, 3, 150, 150, txLoadImage (Player)};
 
     TX_SOCKET Cat_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+    TX_SOCKET Dog_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
 
 
     if (txnAssert (Cat_client) == TXN_NOT_CREATED)
@@ -51,24 +51,21 @@ void Server ()
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
 
+        txRecvFrom             (Dog_client, &Dog, sizeof (Dog));
+
         Cat.Photo              ();
         Cat.Physics            ();
         Cat.Button             (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Brick);
 
+        Brick.Photo            ();
+
         Dog.Photo              ();
         Dog.Physics            ();
-
-        Dog2.Photo             ();
-        Dog2.Physics           ();
-
-        Logic (&Dog, &Cat);
-        Logic (&Dog2, &Cat);
-
-        Brick.Photo            ();
 
         Network Cat_network  = {Cat.x, Cat.y};
 
         txSendTo               (Cat_client, &Cat_network, sizeof(Cat_network));
+
 
         txSleep                (25);
         txSetFillColor         (TX_BLACK);

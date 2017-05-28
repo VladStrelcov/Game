@@ -36,9 +36,10 @@ void Game ()
     {
     Hero Cat    {0,    0,   0, 0, 100, 99,  txLoadImage (Player3)};
     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
-    Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
-    Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+    //Hero Dog2   {123,  50,  2, 5, 150, 150, txLoadImage (Player)};
+    Hero Dog    {500,  500, 5, 3, 150, 150, txLoadImage (Player)};
 
+    TX_SOCKET Dog_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
 
 
@@ -55,24 +56,24 @@ void Game ()
 
         if           (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
 
+        Dog.Photo    ();
+        Dog.Physics  ();
+        Dog.Button   ('W', 'S', 'D', 'A', VK_SPACE, 'Q', &Brick);
+
+        //Dog2.Photo   ();
+        //Dog2.Physics ();
+
+
+        Brick.Photo  ();
+
         Cat.Photo    ();
         Cat.Physics  ();
 
-        Dog.Photo    ();
-        Dog.Physics  ();
+        Network Dog_network  = {Dog.x, Dog.y};
 
-        Dog2.Photo   ();
-        Dog2.Physics ();
-
-        Logic (&Dog, &Cat);
-        Logic (&Dog2, &Cat);
-
-        Brick.Photo  ();
+        txSendTo     (Dog_server, &Dog_network, sizeof(Dog_network));
 
         txSleep      (0);
         }
     }
-
-
-
 

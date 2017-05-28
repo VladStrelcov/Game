@@ -18,7 +18,7 @@ const char   Level2Zad[]   = "Image/Эверест/Эверест_зад.bmp";
 const char   LovePlayer[]  = "Image/Герои/колбаса.bmp";
 
 
-#include "Books/LEONLib.h"
+#include "Books/VladLib.h"
 
 
 

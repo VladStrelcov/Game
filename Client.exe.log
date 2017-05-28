@@ -1,0 +1,415 @@
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#2: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x6175402F в функции SymGetLineFromAddrW64(). Попытка прочесть данные по адресу 0x04EEA6CD. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#3: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdrE0, Thread: 0x19FC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x6175402F in C:\Windows\MgwHelp32.dll: SymGetLineFromAddrW64()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::_txSymGetFromAddr(void*, {anonymous}::TX::Win32::SYMBOL_INFO**, {anonymous}::TX::Win32::IMAGEHLP_LINE64**, const char**, const char**, int) at C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h (9551):
+
+   9600:         {
+   9601: $       SetLastError (0);
+=> 9602: $       (_TX_CALL (MinGW::SymCleanup, (process)) && RES_(u)) || DBG_("MinGW::SymCleanup() failed");
+   9603: $       (_TX_CALL (Win32::SymCleanup, (process)) && RES_(U)) || DBG_("Win32::SymCleanup() failed");
+   9604: 
+
+# 1 in void {anonymous}::TX::_txCleanup() at C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h (6955):
+
+   6953:         { $ _txConsole_Detach (waitableParent && !externTerm); }
+   69   9313: $       bool                    inTX   = false;
+   9314: 
+=> 9315:         if (addr)                { $ inTX = _txSymGetFromAddr ((char*) addr - 1, &sym, &line, &module);          }
+     6808:     if (retcode != 0) txOutputDebugPrintf ("%s - WARNING: %s (%d) called\n", _TX_VERSION, __func__, retcode);
+   6809: 
+=> 6810: $1  _txCleanup();
+   6811: 
+   6812:     Win32::exit (retcode);
+
+# 3 in unsigned int {anonymous}::TX::_txCanvas_ThreadProc(void*  10420: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  10421:     {
+=>10422: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  10423: 
+  10424: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 3 in void Game() at C:\Users\user\Desktop\Capture-the-Sausage\Client.cpp (55):
+
+     53:         txRecvFrom (Cat_server, &Cat, sizeof(Cat));
+     54: 
+=>   55:         txSetFillColor (TX_BLACK);
+     56: 
+     57:         if           (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 15:39:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 15:39:23
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#2: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x6175402F в функции SymGetLineFromAddrW64(). Попытка прочесть данные по адресу 0x04EEA6CD. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#3: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdrE0, Thread: 0x169C (Canvas), GetLastError(): 87 (Параметр задан неверно). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x6175402F in C:\Windows\MgwHelp32.dll: SymGetLineFromAddrW64()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::_txSymGetFromAddr(void*, {anonymous}::TX::Win32::SYMBOL_INFO**, {anonymous}::TX::Win32::IMAGEHLP_LINE64**, const char**, const char**, int) at C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h (9551):
+
+   9600:         {
+   9601: $       SetLastError (0);
+=> 9602: $       (_TX_CALL (MinGW::SymCleanup, (process)) && RES_(u)) || DBG_("MinGW::SymCleanup() failed");
+   9603: $       (_TX_CALL (Win32::SymCleanup, (process)) && RES_(U)) || DBG_("Win32::SymCleanup() failed");
+   9604: 
+
+# 1 in void {anonymous}::TX::_txCleanup() at C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h (6955):
+
+   6953:         { $ _txConsole_Detach (waitableParent && !externTerm); }
+   69   9313: $       bool                    inTX   = false;
+   9314: 
+=> 9315:         if (addr)                { $ inTX = _txSymGetFromAddr ((char*) addr - 1, &sym, &line, &module);          }
+     6808:     if (retcode != 0) txOutputDebugPrintf ("%s - WARNING: %s (%d) called\n", _TX_VERSION, __func__, retcode);
+   6809: 
+=> 6810: $1  _txCleanup();
+   6811: 
+   6812:     Win32::exit (retcode);
+
+# 3 in unsigned int {anonymous}::TX::_txCanvas_ThreadProc(void*  10420: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+    7388: $   if (_txRunning && _txMain)         // Main window is destroyed but main() is still running.
+   7389:         {                              // No chances for good termination, so use exit().
+=> 7390: $       ::exit ((int) msg.wParam);
+   7391:         }
+   7392: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 15:39:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 15:39:23
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00401785 в функции _txInitAsServer() в файле C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h на строке 629. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdRe0, Thread: 0x338 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00401785 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: _txInitAsServer() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (629)
+
+# 1 0x00446ACC in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (339):
+
+    337:             {
+    338:             case TX_CLIENT:   if (! (this->*(_broadcats? &TX_SOCKET :: _txInitAsServer : &TX_SOCKET :: _txInitAsClient))
+=>  339:                                     (IP, (u_short) port, _type_, useTCP, OueueSize)) return;
+    340:                               break;
+    341: 
+
+# 2 0x00401D85 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: txCreateSocket() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (756)
+
+# 3 0x004279AE in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: Game() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (42):
+
+     40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+=>   42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+     43: 
+     44: 
+
+# 4 0x00427769 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: main() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (31):
+
+     29:     txCreateWindow (WinX, WinY);
+     30: 
+=>   31:     Game ();
+     32: 
+     33:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void Game() at C:\Users\user\Desktop\Capture-the-Sausage\Client.cpp (40):
+
+     38:     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+     39:     Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
+=>   40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+     42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 16:19:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 16:19:39
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00401785 в функции _txInitAsServer() в файле C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h на строке 629. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdRe0, Thread: 0x338 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00401785 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: _txInitAsServer() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (629)
+
+# 1 0x00446ACC in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (339):
+
+    337:             {
+    338:             case TX_CLIENT:   if (! (this->*(_broadcats? &TX_SOCKET :: _txInitAsServer : &TX_SOCKET :: _txInitAsClient))
+=>  339:                                     (IP, (u_short) port, _type_, useTCP, OueueSize)) return;
+    340:                               break;
+    341: 
+
+# 2 0x00401D85 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: txCreateSocket() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (756)
+
+# 3 0x004279AE in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: Game() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (42):
+
+     40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+=>   42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+     43: 
+     44: 
+
+# 4 0x00427769 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: main() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (31):
+
+     29:     txCreateWindow (WinX, WinY);
+     30: 
+=>   31:     Game ();
+     32: 
+     33:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void Game() at C:\Users\user\Desktop\Capture-the-Sausage\Client.cpp (40):
+
+     38:     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+     39:     Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
+=>   40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+     42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 16:19:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 16:19:39
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00401785 в функции _txInitAsServer() в файле C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h на строке 629. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdRe0, Thread: 0x1B94 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00401785 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: _txInitAsServer() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (629)
+
+# 1 0x00446ACC in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (339):
+
+    337:             {
+    338:             case TX_CLIENT:   if (! (this->*(_broadcats? &TX_SOCKET :: _txInitAsServer : &TX_SOCKET :: _txInitAsClient))
+=>  339:                                     (IP, (u_short) port, _type_, useTCP, OueueSize)) return;
+    340:                               break;
+    341: 
+
+# 2 0x00401D85 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: txCreateSocket() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (756)
+
+# 3 0x004279AE in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: Game() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (42):
+
+     40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+=>   42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+     43: 
+     44: 
+
+# 4 0x00427769 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: main() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (31):
+
+     29:     txCreateWindow (WinX, WinY);
+     30: 
+=>   31:     Game ();
+     32: 
+     33:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void Game() at C:\Users\user\Desktop\Capture-the-Sausage\Client.cpp (40):
+
+     38:     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+     39:     Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
+=>   40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+     42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 16:36:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 16:36:34
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Client.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00401785 в функции _txInitAsServer() в файле C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h на строке 629. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdRe0, Thread: 0x1B94 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00401785 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: _txInitAsServer() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (629)
+
+# 1 0x00446ACC in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (339):
+
+    337:             {
+    338:             case TX_CLIENT:   if (! (this->*(_broadcats? &TX_SOCKET :: _txInitAsServer : &TX_SOCKET :: _txInitAsClient))
+=>  339:                                     (IP, (u_short) port, _type_, useTCP, OueueSize)) return;
+    340:                               break;
+    341: 
+
+# 2 0x00401D85 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: txCreateSocket() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXNetwork.h (756)
+
+# 3 0x004279AE in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: Game() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (42):
+
+     40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+=>   42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+     43: 
+     44: 
+
+# 4 0x00427769 in C:\Users\user\Desktop\Capture-the-Sausage\Client.exe: main() at C:/Users/user/Desktop/Capture-the-Sausage/Client.cpp (31):
+
+     29:     txCreateWindow (WinX, WinY);
+     30: 
+=>   31:     Game ();
+     32: 
+     33:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void Game() at C:\Users\user\Desktop\Capture-the-Sausage\Client.cpp (40):
+
+     38:     Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
+     39:     Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
+=>   40:     Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+     41: 
+     42:     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 28 2017 16:36:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 28 2017 16:36:34
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Client.exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
