@@ -42,6 +42,8 @@ void Server ()
     TX_SOCKET Cat_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
 
 
+
+
     if (txnAssert (Cat_client) == TXN_NOT_CREATED)
             {
             printf ("Can't create server. Maybe, port are busy.\nn");
@@ -66,6 +68,9 @@ void Server ()
 
         Brick.Photo            ();
 
+        if (GetAsyncKeyState   (VK_F5)) {system ("Start Client"); Sleep (1000);};
+        if (GetAsyncKeyState   (VK_F6)) (txSaveImage ("Screen.bmp"));
+
         Network Cat_network  = {Cat.x, Cat.y};
 
         txSendTo               (Cat_client, &Cat_network, sizeof(Cat_network));
@@ -77,3 +82,4 @@ void Server ()
 
 
     }
+
