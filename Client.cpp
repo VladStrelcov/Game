@@ -14,10 +14,7 @@ const double Fast          = 0.4;
 const int    Stop          = 0,
              Continue      = 1;
 
-const char   Player[]      = "Image/Герои/ерк3.bmp";
-const char   Player2[]     = "Image/stop.bmp";
-const char   Player3[]     = "Image/Герои/кошка.bmp";
-
+const char   FonImage[]    = "Image/Fon.bmp";
 
 #include "Books/LEONLib.h"
 
@@ -34,10 +31,9 @@ int main ()
 
 void Game ()
     {
-    Hero Cat    {0,    0,   0, 0, 100, 99,  txLoadImage (Player3)};
-    Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
-    Hero Dog    {500,  500, 5, 5, 150, 150, txLoadImage (Player)};
-    Hero Dog2   {500,  800, 2, 2, 150, 150, txLoadImage (Player)};
+    Hero Cat    {0,    0,   0, 0, 100,  99};
+    Hero Dog    {500,  500, 5, 5, 150,  150};
+    Hero Fon    {0,    0,   0, 0, WinX, WinY, txLoadImage (FonImage)};
 
     TX_SOCKET Cat_server = txCreateSocket (TX_CLIENT, TX_BROADCAST, TX_STD_PORT, TX_BLOCK, false);
 
@@ -51,23 +47,17 @@ void Game ()
         {
         txRecvFrom (Cat_server, &Cat, sizeof(Cat));
 
-        txSetFillColor (TX_BLACK);
+        Fon.Photo              ();
 
-        if           (!GetAsyncKeyState  (VK_SHIFT))  txClear ();
+        txSetFillColor   (TX_RED);
+        txCircle         (Cat.x, Cat.y, 50);
+        Cat.Physics      ();
 
-        Cat.Photo    ();
-        Cat.Physics  ();
+        txSetFillColor   (TX_YELLOW);
+        txCircle         (Dog.x, Dog.y, 50);
+        Dog.Physics      ();
 
-        Dog.Photo    ();
-        Dog.Physics  ();
-
-        Dog2.Photo   ();
-        Dog2.Physics ();
-
-        Logic (&Dog, &Cat);
-        Logic (&Dog2, &Cat);
-
-        Brick.Photo  ();
+        Logic            (&Dog, &Cat);
 
         txSleep      (0);
         }

@@ -14,9 +14,7 @@ const double Fast          = 0.4;
 const int    Stop          = 0,
              Continue      = 1;
 
-const char   Player[]      = "Image/Герои/ерк3.bmp";
-const char   Player2[]     = "Image/stop.bmp";
-const char   Player3[]     = "Image/Герои/кошка.bmp";
+const char   FonImage[]    = "Image/Fon.bmp";
 
 
 #include "Books/LEONLib.h"
@@ -34,14 +32,13 @@ int main ()
 
 void Server ()
     {
-    Hero Cat    {100,  100, 2, 3, 100, 99,  txLoadImage (Player3)};
-    Hero Brick  {1200, 50,  0, 0, 50,  50,  txLoadImage (Player2)};
-    Hero Dog    {500,  500, 5, 3, 150, 150, txLoadImage (Player)};
-    Hero Dog2   {500,  800, 5, 3, 150, 150, txLoadImage (Player)};
+    Hero Cat    {100,  100, 2,  3,  100,  99};
+    Hero Dog    {500,  500, 10, 10, 150,  150};
+    Hero Fon    {0,    0,   0,  0,  WinX, WinY, txLoadImage (FonImage)};
+
+    int xmap     = 10, ymap   = 10;
 
     TX_SOCKET Cat_client = txCreateSocket (TX_SERVER, TX_BROADCAST, TX_STD_PORT, TX_NONBLOCK, false);
-
-
 
 
     if (txnAssert (Cat_client) == TXN_NOT_CREATED)
@@ -53,23 +50,23 @@ void Server ()
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
 
-        Cat.Photo              ();
-        Cat.Physics            ();
-        Cat.Button             (VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_SPACE, 'Q', &Brick);
+        Fon.Photo              ();
 
-        Dog.Photo              ();
+        txSetFillColor         (TX_RED);
+        txCircle               (Cat.x, Cat.y, 50);
+        Cat.Physics            ();
+        Cat.Button             ('W', 'S', 'D', 'A', VK_SPACE, 'Q', &Cat);
+
+        txSetFillColor         (TX_YELLOW);
+        txCircle               (Dog.x, Dog.y, 50);
         Dog.Physics            ();
 
-        Dog2.Photo             ();
-        Dog2.Physics           ();
+        Logic                  (&Dog, &Cat);
 
-        Logic (&Dog, &Cat);
-        Logic (&Dog2, &Cat);
+        if (GetAsyncKeyState   (VK_F5)) {system      ("Start Client"); Sleep (1000);};
+        if (GetAsyncKeyState   (VK_F6)) (txSaveImage ("Screen.bmp") );
 
-        Brick.Photo            ();
-
-        if (GetAsyncKeyState   (VK_F5)) {system ("Start Client"); Sleep (1000);};
-        if (GetAsyncKeyState   (VK_F6)) (txSaveImage ("Screen.bmp"));
+        LeftRightWindow        (VK_NUMPAD4, VK_NUMPAD6, &xmap, &ymap);
 
         Network Cat_network  = {Cat.x, Cat.y};
 

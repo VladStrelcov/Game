@@ -158,7 +158,7 @@ int  UpdateTime (Hero* hero, int *timeStart, char BoxAnswer[],
     return Continue;
     }
 
-void LeftRightWindow (int Left, int Right, int *xmap, int */*ymap*/)
+void LeftRightWindow (int Left, int Right, int *xmap, int *ymap)
     {
 
     if (GetAsyncKeyState (Left))

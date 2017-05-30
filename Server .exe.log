@@ -1,0 +1,73 @@
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\user\Desktop\Capture-the-Sausage\Server .exe, файл: C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h, строка: 10882, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 105], Instance: 0x004FF43C (32-bit), Flags: CMdRe0, Thread: 0x1EB0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00420541 in C:\Users\user\Desktop\Capture-the-Sausage\Server .exe: txTransparentBlt() at C:/Users/user/Desktop/Capture-the-Sausage/Books/TXLib.h (10882)
+
+# 1 0x004272BA in C:\Users\user\Desktop\Capture-the-Sausage\Server .exe: Photo() at C:/Users/user/Desktop/Capture-the-Sausage/Books/LEONLib.h (81):
+
+     79:     {
+     80: 
+=>   81:     txTransparentBlt (txDC(), x, y, SizeImageX, SizeImageY, Image, 0, 0, TX_WHITE);
+     82: 
+     83:     }
+
+# 2 0x00427B6A in C:\Users\user\Desktop\Capture-the-Sausage\Server .exe: Server() at C:/Users/user/Desktop/Capture-the-Sausage/Server .cpp (71):
+
+     69:         Logic (&Dog2, &Cat);
+     70: 
+=>   71:         Brick.Photo            ();
+     72: 
+     73:         if (GetAsyncKeyState   (VK_F5)) {system ("Start Client"); Sleep (1000);};
+
+# 3 0x00427814 in C:\Users\user\Desktop\Capture-the-Sausage\Server .exe: main() at C:/Users/user/Desktop/Capture-the-Sausage/Server .cpp (31):
+
+     29:     txBegin();
+     30: 
+=>   31:     Server ();
+     32: 
+     33:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h (10882):
+
+  10880:     {
+  10881: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>10882: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  10883: 
+  10884: $   if (width <= 0 || height <= 0)
+
+# 1 in void Hero::Photo() at C:\Users\user\Desktop\Capture-the-Sausage\Books/LEONLib.h (81):
+
+     79:     {
+     80: 
+=>   81:     txTransparentBlt (txDC(), x, y, SizeImageX, SizeImageY, Image, 0, 0, TX_WHITE);
+     82: 
+     83:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\user\Desktop\Capture-the-Sausage\Books/TXLib.h
+Compiled:	May 30 2017 18:03:18, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 30 2017 18:03:20
+
+Run file:	C:\Users\user\Desktop\Capture-the-Sausage\Server .exe
+Directory:	C:\Users\user\Desktop\Capture-the-Sausage
+
+--------------------------------------------------
